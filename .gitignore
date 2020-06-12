@@ -48,3 +48,6 @@ npm-debug.log.*
 *.css.d.ts
 *.sass.d.ts
 *.scss.d.ts
+
+# compile the native addon for each os
+SimpleNativeAddon.node

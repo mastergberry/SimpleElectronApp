@@ -11,7 +11,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -37,6 +37,22 @@ if (
 ) {
   require('electron-debug')();
 }
+
+let addon = null;
+
+try {
+  // eslint-disable-next-line import/no-unresolved
+  addon = require('./SimpleNativeAddon.node');
+} catch (err) {
+  log.error('couldnt load native add on', err);
+}
+
+const callNativeMethod = () => {
+  addon.exampleMethod();
+  setTimeout(callNativeMethod, 1000);
+};
+
+setTimeout(callNativeMethod, 1000);
 
 const installExtensions = async () => {
   const installer = require('electron-devtools-installer');

@@ -21,6 +21,13 @@ export default {
           },
         },
       },
+      {
+        test: /\.node$/,
+        loader: 'native-ext-loader',
+        options: {
+          rewritePath: path.resolve(__dirname, '..', 'app'),
+        },
+      },
     ],
   },
 
